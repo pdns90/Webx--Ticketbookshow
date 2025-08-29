@@ -1,0 +1,26 @@
+header{padding: 10px 0px 15px; background-color: #fff; }
+
+.loginbtn{display: flex; justify-content: flex-end;}
+
+.loginbtn button {
+    background: #bb0404;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0;
+    padding:7px 30px; border: 1px solid #bb0404;
+ margin-left: 20px;
+    border-radius: 25px;
+}
+
+.loginbtn button.login{background-color: #fff; color: #bb0404;}
+
+.menubx{display: flex; align-items: center; justify-content: flex-end;}
+
+.menus ul{margin: 0px; padding: 0; list-style: none;}
+
+.menus ul li{margin: 0; padding: 0; display: inline-block; cursor: pointer;}
+
+.menus ul li a{color: #000; font-size: 16px; padding: 0px 15px; font-weight: 600;}
+
+

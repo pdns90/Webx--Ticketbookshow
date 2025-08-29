@@ -1,0 +1,81 @@
+.ticektbtn{
+    background: #bb0404;
+    color: #fff;
+    font-weight: 600;
+    font-size: 12px;
+    margin: 0;
+    padding: 6px 15px;
+    border: 1px solid #bb0404;
+    border-radius: 25px;
+}
+
+
+.downloadTicket{
+    background: green;
+    color: #fff;
+    font-weight: 600;
+    font-size: 12px;
+    margin: 0;
+    padding: 6px 15px;
+    border: 1px solid green;
+    border-radius: 25px;
+}
+
+.pagination .page-link {
+    color: #bb0404;
+    border: 1px solid #bb0404;
+  }
+  
+  .pagination .page-link:hover {
+    background-color: #bb0404;
+    color: #fff;
+    border-color: #bb0404;
+  }
+  
+  .pagination .page-item.active .page-link {
+    background-color: #bb0404;
+    border-color: #bb0404;
+    color: #fff;
+  }
+  
+  .pagination .page-item.disabled .page-link {
+    color: #ccc;
+    border-color: #ccc;
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+  }
+  
+  .btn-div{
+    display: flex;
+    white-space: nowrap;
+  }
+
+  .btn-div button{
+    margin: 0px 5px;
+
+  }
+
+.email-ellipsis {
+  display: inline-block;
+  max-width: 150px;  /* apni column width ke hisab se adjust karlo */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.seat-div{
+  background-color: #bb0404;
+  color: #fff;
+  padding: 10px;
+  margin-top: -15px
+}
+
+ 
+ @media only screen and ( min-width:320px) and ( max-width:767px ){
+   .seat-div{
+  margin-top: 15px;
+    margin-bottom: 10px;
+}
+  }
+

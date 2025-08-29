@@ -1,0 +1,36 @@
+<div class="loginmain w-100">
+   <div class="logininner">
+     <div class="container p-0">
+        <div class="row">
+            <div class="col-md-12">
+               <div class="loginbg w-100">
+                <div class="loginleft float-start">
+                    <div class="loginhead text-center w-100">
+                        <h3>Login</h3>
+                    </div>
+
+                    <div class="loginform w-100 float-start">
+                        <div class="login-input w-100">
+                            <input type="text" placeholder="Email" [(ngModel)]="email">
+                        </div>
+                        <div class="login-input w-100">
+                            <input type="password" placeholder="Password" [(ngModel)]="password">
+                        </div> 
+                        <div class="submitbtn text-center w-100">
+                            <button (click)="loginUser()">Login</button>
+                        </div>
+                    </div>
+                </div><!--loginleft-->
+
+                <div class="loginright float-start">
+                    <div class="w-100">
+                        <p>Enter your personal details and start journey with us</p>
+                        <!-- <a routerLink="/register">Signup</a> -->
+                    </div>
+                </div> <!--loginright-->
+               </div><!--loginbg-->
+            </div> <!--col-12-->
+        </div><!--row-->
+    </div>
+   </div>
+</div><!--loginmain-->

@@ -1,0 +1,126 @@
+/* You can add global styles to this file, and also import other style files */
+body{margin: 0; padding: 0; font-family: "Poppins", sans-serif;}
+
+h1{margin: 0px; padding: 0; font-size: 45px !important; margin-bottom: 0 !important;}
+
+h2{margin: 0px; padding: 0; font-size: 40px !important; margin-bottom: 0 !important;}
+
+h3{margin: 0px; padding: 0; font-size: 30px !important; margin-bottom: 0 !important;}
+
+h4{margin: 0px; padding: 0; font-size: 28px !important; margin-bottom: 0 !important;}
+
+h5{margin: 0px; padding: 0; font-size: 25px !important; margin-bottom: 0 !important;}
+
+h6{margin: 0px; padding: 0; font-size: 20px !important; margin-bottom: 0 !important;}
+
+p{margin: 0px; padding: 0; font-size: 16px !important; margin-bottom: 0 !important;}
+
+a{text-decoration: none !important;}
+
+.homesection{padding: 30px 0px; background-color: #f5f5f5;}
+
+.heading h3{font-weight:700; ;}
+
+.artistimg{overflow: hidden; border-radius: 5px; }
+
+.artistimg img{width: 100%;}
+
+.artistbx{margin-top: 25px; margin-bottom: 20px;}
+
+.artist-text p{color: #666666;}
+
+.artist-text{margin-top: 15px;}
+
+.artist-text h5{color: #000}
+
+.artistlisting .col-md-3{padding: 0px 20px;}
+
+.poweredtext p{color:#fff; margin-top: 15px;    background:#ffffff52;
+    padding: 10px; display: inline-block; border-radius: 25px; padding: 3px 25px;} 
+
+.poweredtext p img{width:220px;}
+
+header{border-bottom: 1px solid #cecece;}
+
+.selectdv select, .selectdv input{
+    margin-bottom: 20px; font-size: 15px;
+    width: 100%;
+    padding: 8px 5px;
+    border: 1px solid #cecece; outline: none;
+    border-radius: 5px;
+}
+
+.tablesdv{overflow-x: auto;}
+
+.tablesdv table{width: 100%; }
+
+.tablesdv table tr th{background-color: #bb0404; color: #fff; padding: 8px 20px;}
+
+.codeadd{
+    margin-bottom: 20px; font-size: 15px;
+     background-color: #bb0404;
+    padding: 8px 15px;  outline: none; border: none;
+    border-radius: 5px; color: #fff;
+}
+
+.tablesdv table tr  td{padding: 8px 20px; font-size: 15px;}
+
+.dashcontent{padding: 50px 0px;}
+
+.cont h3{margin-bottom: 20px !important;}
+
+.formbxes{
+    max-width: 600px;
+    border: 1px solid #cecece;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 0px auto;
+    background: #f9f7f7;
+}
+
+.promotecode {
+    background: #bb0404;
+    color: #fff;
+    font-weight: 700; cursor: pointer;
+    font-size: 16px;
+    margin: 0;
+    padding: 9px 30px;
+    border: 1px solid #bb0404;
+    margin-top: 20px;
+    border-radius: 25px;
+}
+
+.formbxes input{padding: 10px 15px; outline: none; box-shadow: none;}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+.dashcontent, .seatbook , .contact-detl-sect {
+  flex: 1;
+}
+
+.promobtnnew{padding: 6px 15px;     border-radius: 5px; font-size: 15px;
+border: none; margin: 0px 15px 0px 0px;    background: green;
+    color: #fff;}
+
+.dlte{background-color: #bb0404; color: #fff;}
+
+.download-ticket{
+    background: #bb0404;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0;
+    padding: 7px 30px;
+    border: 1px solid #bb0404;
+    border-radius: 25px;
+}

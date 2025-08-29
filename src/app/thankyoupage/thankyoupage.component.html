@@ -1,0 +1,17 @@
+<div class="thankyou-page">
+    <div class="thankyou-card">
+      <h1>🎉 Thank You!</h1>
+      <p>Your ticket has been successfully booked.</p>
+      <div class="ticket-details">
+        <p><strong>Booking ID:</strong> {{ bookingId }}</p>
+        <p><strong>Total Seats:</strong> {{ selectedSeats.length }}</p>
+        <!-- <p><strong>Total Amount:</strong> ₹{{ totalAmount }}</p> -->
+      </div>
+      <button class="download-ticket downloadTicket" (click)="downloadTicket(bookingId)">
+        <img src="images/arrow.png"> Download Ticket</button>
+
+        <button class="download-ticket exit" (click)="exitPage()" style="margin-left: 10px;">
+          Exit</button>
+    </div>
+  </div>
+  

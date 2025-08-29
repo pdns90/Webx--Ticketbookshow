@@ -1,0 +1,188 @@
+
+<div class="main-container">
+<app-admin-header></app-admin-header>
+
+<section class="dashcontent w-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          
+<div class="cont w-100">
+  <h3>Ticket Book List</h3>
+ <div class="w-100">
+   <div class="row">
+    <div class="col-md-3">
+      <div class="selectdv w-100">
+        <select [(ngModel)]="selectedFilter"
+        (ngModelChange)="applyFilter()"
+      >
+        <option value="" disabled>-- Select Status --</option>
+        <option value="ALL">All</option>
+        <option value="SUCCESS">Success</option>
+        <option value="PENDING">Pending</option>
+        <option value="FAILED">Failed</option>
+          <option value="CANCELLED">Cancel</option>
+      </select>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+       <div class="selectdv w-100">
+        <input
+        type="text"
+        [(ngModel)]="filterValue"
+        (input)="onInputChange($event)"
+        placeholder="Search Here"
+      />
+      
+      
+      
+      
+      
+      </div>
+    </div>
+    
+    
+      <div class="col-md-3">
+         <button class="downloadTicket" (click)="exportTickets()" >Export Tickets</button>
+    </div>
+     <div class="col-md-3 ">
+      <div class="seat-div">
+       <p>Total Seats Booked : {{totalBooked}}</p>
+       <p>Total Available : {{totalAvailable}}</p>
+       </div>
+    </div>
+
+    <!-- <div class="col-md-3">
+      <button class="ticektbtn" (click)="applyFilter()" [disabled]="!filterValue || !filterValue.trim()">Search</button>
+    </div> -->
+  </div>
+ </div>
+
+  <div class="text-center" *ngIf="isLoading">
+    <div class="spinner-border text-danger" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+
+  <div class="tablesdv w-100">
+    <table class="table" *ngIf="!isLoading">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Seat Number</th>
+        <th>Order Number</th>
+        <th>Status</th>
+        <th *ngIf="showActionColumn">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let promo of bookedTicketList">
+        <td>{{promo.name}}</td>
+        <td> <span class="email-ellipsis" [title]="promo.email">
+    {{ promo.email }}
+  </span></td>
+        <td>{{ promo.mobileNumber }}</td>
+         <td>
+      <ng-container *ngIf="promo.tickets">
+        <div *ngFor="let row of promo.tickets.split(','); let i = index">
+          <span *ngIf="i % 3 === 0">
+            {{ promo.tickets.split(',').slice(i, i + 3).join(', ') }}
+          </span><br *ngIf="(i + 1) % 3 === 0">
+        </div>
+      </ng-container>
+    </td>
+        <!-- <td>
+          <ng-container *ngIf="promo.order_no; else noOrder">
+            <div *ngFor="let order of promo.order_no.split(',')">
+              {{ order }}
+            </div>
+          </ng-container>
+          <ng-template #noOrder>
+            <span>No Order</span>
+          </ng-template>
+        </td> -->
+         <td>
+    <ng-container *ngIf="promo.order_no as orderNo; else noOrder">
+  <ng-container *ngIf="orderNo.split(',') as orders">
+    <span [title]="orders.join('\n')">
+      {{ orders[0] }}
+      <span class="more-txt" *ngIf="orders.length > 1">
+        +{{ orders.length - 1 }} more
+      </span>
+    </span>
+  </ng-container>
+</ng-container>
+      <ng-template #noOrder>
+        <span>No Order</span>
+      </ng-template>
+    </td>
+        
+        <td>{{ promo.booked_status }}</td>
+        <td *ngIf="promo.booked_status === 'SUCCESS'">
+         <div class="btn-div">
+           <button class="downloadTicket" (click)="downloadTicket(promo.id)">Download Ticket</button>
+  <button class="ticektbtn" (click)="CancelBookedTicket(promo.id)">Cancel Ticket</button>
+         </div>
+ <div class="modal fade" id="cancelTicketModal" tabindex="-1" aria-labelledby="cancelTicketModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="cancelTicketModalLabel">Cancel Ticket</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <label>Reason for cancellation</label>
+        <textarea [(ngModel)]="cancelReason" class="form-control" rows="3"></textarea>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" (click)="confirmCancelTicket()">OK</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav *ngIf="totalItems > itemsPerPage">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="changePage(currentPage - 1)">Prev</a>
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let page of getPages()"
+        [class.active]="page === currentPage"
+      >
+        <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+      </li>
+      <li
+        class="page-item"
+        [class.disabled]="currentPage === getTotalPages()"
+      >
+        <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+  
+  </div>
+
+</div>
+      </div><!--col-12-->
+    </div><!--row-->
+  </div><!--container-->
+</section>
+ 
+
+<app-footer></app-footer>
+
+</div>

@@ -1,0 +1,326 @@
+<div class="main-container">
+  <app-header></app-header>
+
+  <div class="timer-box">
+    <div class="timer-content">
+      <!-- <span class="timer-icon">⏰</span> -->
+      <span class="timer-text">Time left:</span>
+      <span class="timer-countdown"
+        >{{ timerMinutes }}:{{
+          timerSeconds < 10 ? "0" + timerSeconds : timerSeconds
+        }}</span
+      >
+    </div>
+  </div>
+
+  <section class="contact-detl-sect w-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="share-contact-left w-100">
+            <h5>Details</h5>
+            <div class="sharedata w-100">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="formdata w-100">
+                    <input
+                      type="text"
+                      [(ngModel)]="name"
+                      name="email"
+                      placeholder="Enter Name"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-4 position-relative">
+                  <div class="formdata w-100">
+                    <div class="m-pesa">
+                      <p class="mpesa-label">Your MPESA Number <img src="images/thumb.png"/></p>
+                    </div>
+                    <div class="phone-wrapper">
+                      <span class="prefix">+254</span>
+                      <input
+                        type="tel"
+                        [(ngModel)]="phone"
+                        name="phone"
+                        placeholder="Enter phone number"
+                      />
+                    </div>
+                    <div
+                      *ngIf="phone && !isValidPhone()"
+                      class="text-danger mt-1"
+                    >
+                      Phone number must be between 9 and 10 digits.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="formdata w-100">
+                    <input
+                      type="text"
+                      [(ngModel)]="email"
+                      name="email"
+                      placeholder="Enter Email Address"
+                    />
+                    <div
+                      *ngIf="email && !isValidEmail()"
+                      class="text-danger mt-1"
+                    >
+                      Enter a valid email.
+                    </div>
+                  </div>
+                </div>
+                <!--col-md-5-->
+
+                <div class="col-md-4"  >
+                  <div class="formdata w-100">
+                    <input
+                      type="text"
+                      [disabled]="isPromoApplied"
+                      [(ngModel)]="promotion_code"
+                      name="email"
+                      placeholder="Enter Promotion Code"
+                    />
+                    <div *ngIf="isPromoApplied" class="text-success mt-2">
+                      Promo code applied!
+                    </div>
+                  </div>
+                  <!--formdata-->
+                </div>
+                <!--col-md-3-->
+
+                <div class="col-md-3"  >
+                  <div class="submitbt w-100">
+                    <button
+                      (click)="checkPromoCode()"
+                      [disabled]="
+                       !isFormValid() ||
+                        !promotion_code ||
+                        !promotion_code.trim() ||
+                        isPromoApplied
+                      "
+                    >
+                      Apply Code
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!--row-->
+            </div>
+            <!--sharedata-->
+            <div class="row">
+              <!--col-md-5-->
+
+              <!--col-md-5-->
+
+              <div class="loader-overlay" *ngIf="isLoading">
+                <div class="spinner-border text-danger" role="status">
+                  <span class="sr-only"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--share-contact-left-->
+          <div
+            class="col-md-3"
+            *ngIf="
+              (getGrandTotal() > 0 || showBookButtonForFree) 
+            "
+          >
+            <div class="submitbt w-100">
+              <button
+                (click)="payWithMpesa()"
+                [disabled]="!isFormValid()"
+                [class.disabled-btn]="!isFormValid()"
+              >
+                Book
+              </button>
+            </div>
+          </div>
+
+          <!--sharedata-->
+        </div>
+        <!--share-contact-left-->
+
+        <!--col-md-6-->
+
+        <div class="col-md-8 col-lg-4">
+          <div class="orderright w-100">
+            <div class="ordersummarybx w-100">
+              <div class="orderhead w-100">
+                <h6>Order Summary</h6>
+                <p>{{ selectedSeats.length }} Tickets</p>
+              </div>
+
+              <table class="table">
+                <tbody>
+                  <tr *ngFor="let seat of selectedSeats">
+                    <td>{{ seat.row_label }}{{ seat.ticket_number }}</td>
+                    <td style="text-align: right">
+                      {{ seat.price | number : "1.0-0" }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="subtotal w-100">
+                <h6>Total</h6>
+                <p>Kes: {{ getFinalAmount() | number : "1.0-0" }}</p>
+              </div>
+
+              <div class="subtotal w-100">
+                <h6>Discount</h6>
+                <p>Kes: {{ getAppliedDiscount() | number : "1.0-0" }}</p>
+              </div>
+
+              <div class="subtotal w-100">
+                <h6>Grand Total</h6>
+                <p>Kes: {{ getGrandTotal() | number : "1.0-0" }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--row-->
+    <!-- </div> -->
+    <!--container-->
+  </section>
+  <!--contact-detl-sect-->
+  <!-- Bootstrap Modal -->
+  <div
+    class="modal fade"
+    id="termsModal"
+    tabindex="-1"
+    aria-labelledby="seatModalLabel"
+    aria-hidden="true"
+  >
+    <div
+      class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg"
+    >
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="termsdata w-100">
+            <h5>Terms & Conditions</h5>
+
+            <div>
+              <h6>🎟 Ticket Purchase and Entry</h6>
+              <ul>
+                <li>
+                  All attendees must present a valid ticket for entry. Tickets
+                  must be purchased through authorized platforms or vendors.
+                </li>
+                <li>
+                  Tickets are non-refundable and non-transferable unless the
+                  event is canceled or rescheduled.
+                </li>
+                <li>
+                  Entry is permitted only to individuals with a valid ticket.
+                </li>
+                <li>
+                  Re-entry to the venue is not permitted once you exit, unless
+                  otherwise stated.
+                </li>
+              </ul>
+
+              <h6>⏰ Event Schedule</h6>
+              <ul>
+                <li>Doors open at 5:15pm and the concert begins at 5:45pm.</li>
+                <li>
+                  The organizer reserves the right to change the schedule,
+                  lineup, or duration of performances without prior notice.
+                </li>
+              </ul>
+
+              <h6>🏛 Venue Rules</h6>
+              <ul>
+                <li>
+                  The concert will be held at Karania Auditorium at Jalaram
+                  Temple, located at 19 Ring Road, Parklands, Nairobi.
+                </li>
+                <li>
+                  Smoking, vaping, and use of alcohol and other illegal
+                  substances are strictly prohibited inside the venue.
+                </li>
+                <li>Outside food and beverages are not allowed.</li>
+                <li>
+                  Attendees must comply with all venue staff instructions and
+                  posted signage.
+                </li>
+              </ul>
+
+              <h6>📸 Photography and Recording</h6>
+              <ul>
+                <li>
+                  Professional photography, video recording, and live streaming
+                  are prohibited unless authorized by the organizer.
+                </li>
+                <li>
+                  By attending, you consent to being photographed or recorded
+                  for promotional purposes.
+                </li>
+              </ul>
+
+              <h6>🛡 Safety and Liability</h6>
+              <ul>
+                <li>
+                  The organizer is not responsible for personal injury, loss, or
+                  damage to personal property.
+                </li>
+                <li>
+                  Attendees are responsible for their own safety and belongings.
+                </li>
+                <li>
+                  In case of emergency, follow instructions from venue staff and
+                  emergency personnel.
+                </li>
+              </ul>
+
+              <h6>🚫 Prohibited Items</h6>
+              <ul>
+                <li>
+                  Alcohol, weapons, sharp objects, fireworks, and any items
+                  deemed dangerous are not allowed.
+                </li>
+                <li>Bags may be subject to search upon entry.</li>
+              </ul>
+
+              <h6>📄 Cancellation and Force Majeure</h6>
+              <ul>
+                <li>
+                  If the event is canceled due to unforeseen circumstances
+                  (e.g., natural disasters, government restrictions), ticket
+                  holders will be notified and refund policies will be
+                  communicated.
+                </li>
+                <li>
+                  The organizer is not liable for delays or cancellations caused
+                  by events beyond their control.
+                </li>
+              </ul>
+
+              <h6>✅ Acceptance of Terms</h6>
+              <ul>
+                <li>
+                  By purchasing a ticket and attending the concert, you agree to
+                  abide by these Terms and Conditions.
+                </li>
+                <li>
+                  The organizer reserves the right to refuse entry or remove
+                  individuals who violate these terms.
+                </li>
+              </ul>
+            </div>
+
+            <div class="buttonsterms w-100">
+              <button class="close" (click)="closeModel(true)">Cancel</button>
+              <button (click)="confirmPayment()">Accept</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

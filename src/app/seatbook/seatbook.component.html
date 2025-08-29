@@ -1,0 +1,345 @@
+ 
+
+<div #paymentBar class="ticket-payment w-100" [class.sticky]="isStuck">
+  <div
+    class="container text-center"
+    *ngIf="selectedSeats.length > 0 && !isLoadingSeats"
+  >
+    <div class="tickettotal w-100">
+      <h5>Total Ticket: {{ selectedSeats.length }}</h5>
+      <h5>Total Price: Kes {{ totalAmount | number : "1.0-0" }}</h5>
+
+      <button
+        (click)="checkSeatAvailablilty()"
+        [disabled]="selectedSeats.length === 0"
+      >
+        Pay Now
+      </button>
+    </div>
+  </div>
+  <div class="blockdata w-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="lsitingbooks">
+            <ul>
+              <li><span class="bookseat"></span> Booked</li>
+              <li><span></span> Available</li>
+               <li><span class="hold"></span> Hold</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-container">
+  <div *ngIf="isLoadingSeats" class="loader">
+    <div
+      class="spinner-border text-danger"
+      role="status"
+      *ngIf="isLoadingSeats"
+    >
+      <span class="sr-only"></span>
+    </div>
+  </div>
+  <section class="seatbook w-100" *ngIf="!isLoadingSeats">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="seatingheaing justify-content-center w-100">
+            <h3>Sur Mayee Shaam, 14th Sep 2025, 5:30 pm</h3>
+          </div>
+          <h5 class="justify-content-center">Karania Auditorium at Jalaram</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="seatingheaing w-100">
+            <h4></h4>
+            <a
+              href="../jalaram-karania-auditorium-seating-plan.pdf"
+              target="_blank"
+              >View Actual Layout</a
+            >
+          </div>
+         <div class="w-100 d-flex align-items-center position-relative">
+  <div class="ticket-prz">
+    <p>Rows A - K &#64; 3,000</p>
+    <p>Rows L - P &#64; 2,000</p>
+  </div>
+
+  <h3 class="mb-1 flex-grow-1 text-center">Stage</h3>
+</div>
+
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="container-fluid">
+      <div class="seat-row d-none d-md-block">
+        <div
+          class="row"
+          *ngFor="let row of seats"
+          [ngClass]="{ 'extra-space': row.row_label === 'K' }"
+        >
+          <ng-container *ngFor="let detail of row.details">
+            <div class="col-md-4 col-4">
+              <div
+                class="seatleft w-100"
+                [ngClass]="{
+                  seatcenter: detail.section === 'Center',
+                  seatright: detail.section === 'Right'
+                }"
+              >
+                <ul>
+                  <li class="seatnum">
+                    <span>{{ row.row_label }}</span>
+                  </li>
+                  <li *ngFor="let seat of detail.tickets">
+                    <div
+                      class="number"
+                      [attr.title]="
+                        'Price: Kes ' + (seat.price | number : '1.0-0')
+                      "
+                      [ngClass]="{
+                        booked: seat.is_booked === 'yes',
+                        selected: isSelected(seat.id),
+                        hold: seat.is_hold === 'yes',
+                       'extra-gap': 
+        (row.row_label === 'P' && seat.ticket_number === 14) ||
+        (row.row_label === 'N' && seat.ticket_number === 15) ||
+        (row.row_label === 'O' && seat.ticket_number === 15)
+                      }"
+                      (click)="toggleSeatSelection(seat, row.row_label)"
+                    >
+                      {{ seat.ticket_number }}
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="d-md-none">
+        <div class="seat-row">
+          <div
+            class="row"
+            *ngFor="let row of seats"
+            [ngClass]="{ 'extra-space': row.row_label === 'K' }"
+          >
+            <div class="col-md-12">
+              <div class="seatleft w-100">
+                <ul>
+                  <li class="seatnum">
+                    <span>{{ row.row_label }}</span>
+                  </li>
+                  <li *ngFor="let detail of row.details" class="seat-section">
+                     <ul class="seat-group">
+                      <li *ngFor="let seat of detail.tickets">
+                        <div
+                          class="number"
+                          [attr.title]="
+                            'Price: Kes ' + (seat.price | number : '1.0-0')
+                          "
+                          [ngClass]="{
+                            booked: seat.is_booked === 'yes',
+                            selected: isSelected(seat.id),
+                            hold: seat.is_hold === 'yes',
+                             'extra-gap': 
+        (row.row_label === 'P' && seat.ticket_number === 14) ||
+        (row.row_label === 'N' && seat.ticket_number === 15) ||
+        (row.row_label === 'O' && seat.ticket_number === 15)
+                          }"
+                          (click)="toggleSeatSelection(seat, row.row_label)"
+                        >
+                          {{ seat.ticket_number }}
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>
+
+
+ 
+<!-- 
+<div #paymentBar class="ticket-payment w-100" [class.sticky]="isStuck">
+  <div
+    class="container text-center"
+    *ngIf="selectedSeats.length > 0 && !isLoadingSeats"
+  >
+    <div class="tickettotal w-100">
+      <h5>Total Ticket: {{ selectedSeats.length }}</h5>
+      <h5>Total Price: Kes {{ totalAmount | number : "1.0-0" }}</h5>
+
+      <button
+        (click)="checkSeatAvailablilty()"
+        [disabled]="selectedSeats.length === 0"
+      >
+        Pay Now
+      </button>
+    </div>
+  </div>
+  <div class="blockdata w-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="lsitingbooks">
+            <ul>
+              <li><span class="bookseat"></span> Booked</li>
+              <li><span></span> Available</li>
+               <li><span class="hold"></span> Hold</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-container">
+  <div *ngIf="isLoadingSeats" class="loader">
+    <div
+      class="spinner-border text-danger"
+      role="status"
+      *ngIf="isLoadingSeats"
+    >
+      <span class="sr-only"></span>
+    </div>
+  </div>
+  <section class="seatbook w-100" *ngIf="!isLoadingSeats">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="seatingheaing justify-content-center w-100">
+            <h3>Sur Mayee Shaam, 14th Sep 2025, 5:30 pm</h3>
+          </div>
+          <h5 class="justify-content-center">Karania Auditorium at Jalaram</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="seatingheaing w-100">
+            <h4></h4>
+            <a
+              href="../jalaram-karania-auditorium-seating-plan.pdf"
+              target="_blank"
+              >View Actual Layout</a
+            >
+          </div>
+         <div class="w-100 d-flex align-items-center position-relative">
+  <div class="ticket-prz">
+    <p>Rows A - K &#64; 3,000</p>
+    <p>Rows L - P &#64; 2,000</p>
+  </div>
+
+  <h3 class="mb-1 flex-grow-1 text-center">Stage</h3>
+</div>
+
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="container-fluid">
+      <div class="seat-row d-none d-md-block">
+      <div class="row"
+     *ngFor="let row of seats"
+     [ngClass]="{ 'extra-space': row.row_label === 'K' }">
+
+  <ng-container *ngFor="let detail of row.details">
+    <div class="col-md-4 col-4">
+      <div
+        class="seatleft w-100"
+        [ngClass]="{
+          seatcenter: detail.section === 'Center',
+          seatright: detail.section === 'Right'
+        }"
+      >
+        <ul>
+          <li class="seatnum" *ngIf="detail.section === 'Left'">
+            <span>{{ row.row_label }}</span>
+          </li>
+          <li *ngFor="let seat of detail.tickets">
+            <div class="number"
+              [attr.title]="'Price: Kes ' + (seat.price | number : '1.0-0')"
+              [ngClass]="{
+                booked: seat.is_booked === 'yes',
+                selected: isSelected(seat.id),
+                hold: seat.is_hold === 'yes'
+              }"
+              (click)="toggleSeatSelection(seat, row.row_label)">
+              {{ seat.ticket_number }}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+      </div>
+
+      <div class="d-md-none">
+        <div class="seat-row">
+         <div
+  class="row"
+  *ngFor="let row of seats"
+  [ngClass]="{ 'extra-space': row.row_label === 'K' }"
+>
+  <div class="col-md-12">
+    <div class="seatleft w-100">
+      <ul>
+        <li class="seatnum">
+          <span>{{ row.row_label }}</span>
+        </li>
+
+         <li *ngFor="let detail of row.details" class="seat-section"> 
+
+          <ul class="seat-group">
+            <li *ngFor="let seat of detail.tickets">
+              <div
+                class="number"
+                [attr.title]="'Price: Kes ' + (seat.price | number : '1.0-0')"
+                [ngClass]="{
+                  booked: seat.is_booked === 'yes',
+                  selected: isSelected(seat.id),
+                  hold: seat.is_hold === 'yes'
+                }"
+                (click)="toggleSeatSelection(seat, row.row_label)"
+              >
+                {{ seat.ticket_number }}
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+        </div>
+       </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div> -->

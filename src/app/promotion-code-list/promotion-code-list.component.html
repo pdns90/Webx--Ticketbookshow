@@ -1,0 +1,56 @@
+
+
+<div class="main-container">
+    <app-admin-header></app-admin-header>
+<section class="dashcontent w-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+  <div class="cont">
+    <h3>Promotion Code List</h3>
+    <button class="codeadd" (click)="addPromotionCode()">
+      Add Promotion Code
+    </button>
+      <div class="tablesdv w-100">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Code</th>
+          <th>Apply Count</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of promotionList">
+          <td>{{ item.title }}</td>
+          <td>{{ item.code }}</td>
+          <td>{{ item.max_apply }}</td>
+          <td>
+            <button
+              class="promobtnnew"
+              (click)="editPromotionCode(item.id)"
+            >
+              Update
+            </button>
+            <button
+              class="promobtnnew dlte"
+              (click)="deletePromotionCodeById(item.id)"
+              *ngIf="item.disable == 'true'"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </section>
+
+<app-footer></app-footer>
+
+</div>

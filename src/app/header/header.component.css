@@ -1,0 +1,87 @@
+header {
+  padding: 10px 0px 15px;
+  background-color: #fff;
+}
+
+.loginbtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.loginbtn button {
+  background: #bb0404;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0;
+  padding: 7px 30px;
+  border: 1px solid #bb0404;
+  margin-left: 20px;
+  border-radius: 25px;
+}
+
+.loginbtn button.login{background-color: #fff; color: #bb0404;}
+
+
+.logodv{
+      color: #bb0404;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0px;
+}
+
+.continfo ul{margin: 0px;
+    padding: 0px; list-style: none;}
+
+.continfo ul li {
+    margin: 10px 20px 0px 0px;
+    color: #bb0404;
+    font-size: 18px;
+    display: inline-block;
+    font-weight: 600;
+}
+@media only screen and ( min-width:768px) and ( max-width:960px ){
+
+    .loginbtn button { 
+  padding: 7px 18px;   border: 1px solid #bb0404;
+}
+
+.continfo  ul  li  {
+  margin: 10px 12px 0px 0px;
+  font-size: 12px; 
+}
+
+}
+
+@media only screen and ( min-width:600px) and ( max-width:767px ){
+
+    .continfo ul  li  {
+  margin: 5px 20px 0px 0px; font-size: 13px; 
+}
+
+.loginbtn button { font-size: 14px;  margin-left: 0px;
+  padding: 7px 18px;   border: 1px solid #bb0404;
+  margin-left: 0; border-radius: 25px;  margin-top: 10px;
+}
+
+}
+
+@media only screen and ( min-width:320px) and ( max-width:559px ){
+
+    .continfo ul  li  {
+  margin: 5px 0px 0px 0px; font-size: 12px; 
+}
+
+
+.loginbtn {
+  justify-content: flex-start;
+}
+
+.loginbtn button{margin-left: 0; margin-top: 20px;}
+
+.loginbtn button { font-size: 14px;  margin-left: 0px;
+  padding: 7px 18px;   border: 1px solid #bb0404;
+  margin-left: 0; border-radius: 25px;  margin-top: 10px;
+}
+
+}

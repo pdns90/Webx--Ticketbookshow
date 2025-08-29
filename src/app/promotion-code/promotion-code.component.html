@@ -1,0 +1,44 @@
+ <div class="main-container">
+ <app-admin-header></app-admin-header>
+ 
+ 
+<section class="dashcontent w-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+ <form [formGroup]="form" (ngSubmit)="onSubmit()" class="formbxes  mx-auto ">
+
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" id="title" formControlName="title" class="form-control" placeholder="Enter title" />
+    </div>
+  
+    <div class="mb-3">
+      <label for="code" class="form-label">Code</label>
+      <input type="text" id="code" formControlName="code" class="form-control" placeholder="Enter code" />
+    </div>
+  
+    <div class="mb-3">
+      <label for="amount" class="form-label">Amount</label>
+      <input type="number" id="amount" formControlName="amount" class="form-control" placeholder="Enter amount" />
+    </div>
+  
+    <div class="mb-3">
+      <label for="max_apply" class="form-label">Max Count</label>
+      <input type="number" id="max_apply" formControlName="max_apply" class="form-control" placeholder="Enter max count" />
+    </div>
+  
+    <button type="submit" class="promotecode" [disabled]="form.invalid">
+      {{ isEditMode ? 'Update Promotion Code' : 'Create Promotion Code' }}
+    </button>
+      </form>
+  
+    </div>
+  </div>
+ </div>
+</section>
+      
+<app-footer></app-footer>
+
+</div>

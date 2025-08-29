@@ -1,0 +1,35 @@
+<section class="bannersection w-100">
+    <div class="slider-container">
+    <div
+      class="slider-track"
+      [style.transform]="'translateX(-' + currentSlide * 100 + '%)'"
+      [ngStyle]="{
+        transform: 'translateX(-' + currentSlide * 100 + '%)',
+        transition: transitionEnabled ? 'transform 0.6s ease-in-out' : 'none'
+      }"
+    >
+      <div class="slide" *ngFor="let slide of slides">
+        <div class="card-wrapper">
+          <img class="bg-img" [src]="slide.bgImg" alt="Background" /> 
+        </div>
+      </div>
+
+
+      <div class="slide" *ngFor="let slide of slides">
+        <div class="card-wrapper">
+          <img class="bg-img" [src]="slide.bgImg" alt="Background" /> 
+        </div>
+      </div>
+    </div>
+  
+    <div class="dots">
+        <span
+          *ngFor="let slide of slides.slice(1, slides.length - 1); let i = index"
+          [class.active]="i + 1 === currentSlide"
+          (click)="setSlide(i)"
+        ></span>
+      </div>
+      
+  </div>
+  
+</section>
