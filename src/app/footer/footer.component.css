@@ -1,8 +1,9 @@
-footer{width: 100%; padding:20px 0px; background-color: #4f4e4e;}
+footer{width: 100%; padding:20px 0px; background-color: #383636;}
 
 .footerleft p {
-    color: #999999; margin:5px 0px !important;
-    font-size: 13px !important;
+    color: #cdcdcd;
+    margin: 5px 0px !important;
+    font-size: 15px !important;
 }
 
 .footerleft button{

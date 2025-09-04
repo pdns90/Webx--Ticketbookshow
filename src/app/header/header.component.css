@@ -40,6 +40,11 @@ header {
     display: inline-block;
     font-weight: 600;
 }
+
+.continfo{display: flex; align-items: center; justify-content: flex-end;}
+
+
+
 @media only screen and ( min-width:768px) and ( max-width:960px ){
 
     .loginbtn button { 
@@ -85,3 +90,4 @@ header {
 }
 
 }
+

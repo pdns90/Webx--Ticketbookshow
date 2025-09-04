@@ -21,8 +21,8 @@ export class BannerComponent {
     {
       title: 'Banner 2',
       subtitle: 'Banner 2',
-      cardImg: 'images/New BannerA3.jpg ',
-      bgImg: 'images/New BannerA3.jpg '
+      cardImg: 'images/New Banner-A3.jpg ',
+      bgImg: 'images/New Banner-A3.jpg '
     }, 
   ];
 

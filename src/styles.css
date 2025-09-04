@@ -40,8 +40,6 @@ a{text-decoration: none !important;}
 
 .poweredtext p img{width:220px;}
 
-header{border-bottom: 1px solid #cecece;}
-
 .selectdv select, .selectdv input{
     margin-bottom: 20px; font-size: 15px;
     width: 100%;
@@ -124,3 +122,19 @@ border: none; margin: 0px 15px 0px 0px;    background: green;
     border: 1px solid #bb0404;
     border-radius: 25px;
 }
+
+.demo-banner {
+  width: 100%;
+  background: #fff3cd;
+  color: #856404;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: bold;
+  z-index: 9999; text-align: center;
+  overflow: hidden;
+}
+
+.demo-banner p {
+  display: inline-block; font-size: 18px;
+}
+

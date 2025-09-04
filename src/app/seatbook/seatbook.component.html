@@ -1,4 +1,8 @@
  
+<div class="demo-banner">
+  <p>⚠️ Please note: This is a demo system and does not reflect live data or final functionality.</p>
+</div>
+
 
 <div #paymentBar class="ticket-payment w-100" [class.sticky]="isStuck">
   <div
@@ -6,8 +10,8 @@
     *ngIf="selectedSeats.length > 0 && !isLoadingSeats"
   >
     <div class="tickettotal w-100">
-      <h5>Total Ticket: {{ selectedSeats.length }}</h5>
-      <h5>Total Price: Kes {{ totalAmount | number : "1.0-0" }}</h5>
+      <h5>Total Ticket: <strong>{{ selectedSeats.length }}</strong></h5>
+      <h5>Total Price: <strong>Kes {{ totalAmount | number : "1.0-0" }}</strong></h5>
 
       <button
         (click)="checkSeatAvailablilty()"
@@ -51,7 +55,7 @@
           <div class="seatingheaing justify-content-center w-100">
             <h3>Sur Mayee Shaam, 14th Sep 2025, 5:30 pm</h3>
           </div>
-          <h5 class="justify-content-center">Karania Auditorium at Jalaram</h5>
+          <h5 class="justify-content-center">Demo Auditorium </h5>
         </div>
       </div>
     </div>
@@ -61,11 +65,7 @@
         <div class="col-md-12">
           <div class="seatingheaing w-100">
             <h4></h4>
-            <a
-              href="../jalaram-karania-auditorium-seating-plan.pdf"
-              target="_blank"
-              >View Actual Layout</a
-            >
+            
           </div>
          <div class="w-100 d-flex align-items-center position-relative">
   <div class="ticket-prz">
